@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Topic, Course
+from .models import Topic, Course, Lecture
 
 # Register your models here.
 class TopicAdmin(admin.ModelAdmin):
@@ -20,6 +20,16 @@ class CourseAdmin(admin.ModelAdmin):
     prepopulated_fields = {"course_slug": ("course_title", )}
 
 
+class LectureAdmin(admin.ModelAdmin):
+    list_display = ('lecture_title', 'course', 'lecture_slug', 'lecture_previewable')
+    list_editable = ('lecture_slug', 'lecture_previewable')
+    list_filter = ('lecture_previewable', 'lecture_created_at')
+    list_per_page = 10
+    search_fields = ('lecture_title', 'lecture_description')
+    prepopulated_fields = {"lecture_slug": ("lecture_title", )}
+
+
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(Course, CourseAdmin)
+admin.site.register(Lecture, LectureAdmin)
 
