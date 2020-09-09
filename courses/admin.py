@@ -1,0 +1,25 @@
+from django.contrib import admin
+from .models import Topic, Course
+
+# Register your models here.
+class TopicAdmin(admin.ModelAdmin):
+    list_display = ('topic_title', 'topic_slug', 'topic_is_active')
+    list_editable = ('topic_slug', 'topic_is_active')
+    list_filter = ('topic_is_active', 'topic_created_at')
+    list_per_page = 10
+    search_fields = ('topic_title', 'topic_description')
+    prepopulated_fields = {"topic_slug": ("topic_title", )}
+
+
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('course_title', 'course_slug', 'course_is_active')
+    list_editable = ('course_slug', 'course_is_active')
+    list_filter = ('course_is_active', 'course_created_at')
+    list_per_page = 10
+    search_fields = ('course_title', 'course_description')
+    prepopulated_fields = {"course_slug": ("course_title", )}
+
+
+admin.site.register(Topic, TopicAdmin)
+admin.site.register(Course, CourseAdmin)
+
