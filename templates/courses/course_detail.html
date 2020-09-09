@@ -24,7 +24,9 @@
         <div class="list-group">
             {% if lectures %}
                 {% for lecture in lectures %}
-                    <a href="#" class="list-group-item list-group-item-action">{{ lecture.lecture_title }}</a>
+                    <a href="#" class="list-group-item list-group-item-action {% if lecture.lecture_previewable == "No" %}disabled{% endif %}">
+                        {{ lecture.lecture_title }}  {% if lecture.lecture_previewable == "Yes" %}<small class="text-muted">[ Watch Preview ]</small>{% endif %}
+                    </a>
                 {% endfor %}
             {% endif %}
         </div>
