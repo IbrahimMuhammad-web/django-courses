@@ -7,15 +7,16 @@
 
 {% block content %}
     <div class="row">
-    
+
+
     {% comment %} Lecture Sidebar Goes Here {% endcomment %}
     {% include 'partials/_lecture_sidebar.html' %}
 
 
+
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-        {% if first_lecture %}
-            {% for lecture_selected in first_lecture %}
+        {% if lecture_selected %}
     
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">{{ lecture_selected.lecture_title }}</h1>
@@ -53,18 +54,6 @@
                     {{ lecture_selected.lecture_description }}
                 </p>
             
-            {% endfor %}
-
-            {% else %}
-
-            <div class="alert alert-danger mt-5" role="alert">
-            Lectures not added yet. Please come back later.
-            </div>
-
-            <a href="{% url 'home' %}" class="btn btn-primary btn-lg text-center">
-                Go Home
-            </a>
-
         {% endif %}
 
 

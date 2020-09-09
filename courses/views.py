@@ -30,12 +30,43 @@ def course_detail(request, course_slug):
         }
         return render(request, 'courses/course_detail.html', context)
 
-    except Course.DoesNotExist:
+    except:
         messages.error(request, "Course Does not Exist.")
         return redirect(index)
 
 
-def lecture(request):
-    return render(request, 'courses/lecture.html')
+def lecture(request, course_slug):
+    try:
+        course = Course.objects.get(course_slug=course_slug)
+        lectures = Lecture.objects.filter(course=course.id)
+        first_lecture = Lecture.objects.filter(course=course.id)[:1]
+        context = {
+            'course': course,
+            'lectures': lectures,
+            'first_lecture': first_lecture,
+        }
+        return render(request, 'courses/lecture.html', context)
+
+    except:
+        messages.error(request, "Course Does not Exist.")
+        return redirect(index)
+
+
+def lecture_selected(request, course_slug, lecture_slug):
+    try:
+        course = Course.objects.get(course_slug=course_slug)
+        lectures = Lecture.objects.filter(course=course.id)
+        lecture_selected = Lecture.objects.get(lecture_slug=lecture_slug)
+        context = {
+            'course': course,
+            'lectures': lectures,
+            'lecture_selected': lecture_selected,
+        }
+        return render(request, 'courses/lecture_selected.html', context)
+
+    except:
+        messages.error(request, "Course Does not Exist.")
+        return redirect(index)
+
         
 

@@ -15,6 +15,12 @@
             <img src="{{ course.course_image.url }}" class="img-fluid">
         {% endif %}
 
+        <div class="mt-5">
+            <a href="#" class="btn btn-danger btn-lg mr-3">Enroll Now</a>
+
+            <a href="{% url 'lecture' course.course_slug %}" class="btn btn-primary btn-lg">Go to the Course</a>
+        </div>
+
         <p class="mt-5 lead">
             {{ course.course_description }}
         </p>
@@ -23,7 +29,7 @@
 
         <div class="list-group">
             {% if lectures %}
-                <h3 class="mt-5 mb-5">All Lectures</h3>
+                <h3 class="my-5">All Lectures</h3>
                 {% for lecture in lectures %}
                     <a href="#" class="list-group-item list-group-item-action {% if lecture.lecture_previewable == "No" %}disabled{% endif %}">
                         {{ lecture.lecture_title }}  {% if lecture.lecture_previewable == "Yes" %}<small class="text-muted">[ Watch Preview ]</small>{% endif %}
