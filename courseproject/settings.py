@@ -1,4 +1,5 @@
 import os
+from django.contrib import messages # To change ERROR into Danger
 
 from pathlib import Path
 
@@ -117,3 +118,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static') # It'll be automatically created 
 # Settings for Media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# For Red Color on Error MEssages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}

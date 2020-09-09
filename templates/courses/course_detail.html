@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ course.seo_course_title }}
+{% endblock title %}
+
+
+{% block content %}
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <h1 class="mb-5 display-4">{{ course.course_title }}</h1>
+
+        {% if course.course_image %}
+            <img src="{{ course.course_image.url }}" class="img-fluid">
+        {% endif %}
+
+        <p class="mt-5 lead">
+            {{ course.course_description }}
+        </p>
+
+        <h3 class="mt-5 mb-5">All Lectures</h3>
+
+        <div class="list-group">
+            {% if lectures %}
+                {% for lecture in lectures %}
+                    <a href="#" class="list-group-item list-group-item-action">{{ lecture.lecture_title }}</a>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+      
+    </div>
+  </div>
+{% endblock content %}
