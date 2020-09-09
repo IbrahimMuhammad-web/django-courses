@@ -19,10 +19,11 @@
             {{ course.course_description }}
         </p>
 
-        <h3 class="mt-5 mb-5">All Lectures</h3>
+        
 
         <div class="list-group">
             {% if lectures %}
+                <h3 class="mt-5 mb-5">All Lectures</h3>
                 {% for lecture in lectures %}
                     <a href="#" class="list-group-item list-group-item-action {% if lecture.lecture_previewable == "No" %}disabled{% endif %}">
                         {{ lecture.lecture_title }}  {% if lecture.lecture_previewable == "Yes" %}<small class="text-muted">[ Watch Preview ]</small>{% endif %}

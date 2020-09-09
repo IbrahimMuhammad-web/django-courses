@@ -33,5 +33,9 @@ def course_detail(request, course_slug):
     except Course.DoesNotExist:
         messages.error(request, "Course Does not Exist.")
         return redirect(index)
+
+
+def lecture(request):
+    return render(request, 'courses/lecture.html')
         
 
