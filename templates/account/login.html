@@ -1,0 +1,45 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block title %}
+Sign In | Vijay Thapa
+{% endblock title %}
+
+{% block content %}
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <form class="form-signin" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                
+                <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+                <hr>
+
+                {{ form.as_p }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+
+
+                {% get_providers as socialaccount_providers %}
+
+                {% if socialaccount_providers %}
+                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-lg btn-danger btn-block">Log in with Google</a>
+                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-lg btn-dark btn-block">Log in with Github</a>
+                {% endif %}
+
+                <p class="mt-5 mb-3 text-muted text-center">or <a href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
+
+                <p class="mb-3 text-muted text-center">Don't have an account? <a href="{% url 'account_signup' %}"><strong>Sign up</strong></a></p>
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
