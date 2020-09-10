@@ -110,8 +110,20 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="#">Profile</a>
+                      <a class="dropdown-item" href="{% url 'account_change_password' %}">Change Password</a>
+
+
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+
+                      {% comment %} <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a> {% endcomment %}
+
+                      <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        <button type="submit" class="dropdown-item">Log Out</button>
+                      </form>
                     </div>
                 </li>
               </ul>

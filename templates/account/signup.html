@@ -9,6 +9,8 @@ Sign Up | Vijay Thapa
 
 {% block content %}
     <div class="album py-5 bg-light">
+        {% include 'partials/_messages.html' %}
+
         <div class="container">
 
             <form class="form-signin" method="POST" action="{% url 'account_login' %}">
@@ -29,8 +31,8 @@ Sign Up | Vijay Thapa
                 {% get_providers as socialaccount_providers %}
 
                 {% if socialaccount_providers %}
-                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-lg btn-danger btn-block">Log in with Google</a>
-                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-lg btn-dark btn-block">Log in with Github</a>
+                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-md btn-danger btn-block">Log in with Google</a>
+                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-md btn-dark btn-block">Log in with Github</a>
                 {% endif %}
 
                 

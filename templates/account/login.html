@@ -9,12 +9,13 @@ Sign In | Vijay Thapa
 
 {% block content %}
     <div class="album py-5 bg-light">
+        {% include 'partials/_messages.html' %}
         <div class="container">
 
             <form class="form-signin" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 
-                <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+                <h1 class="h3 mb-3 font-weight-normal text-center">Log in to your Account!</h1>
                 <hr>
 
                 {{ form.as_p }}
@@ -29,8 +30,8 @@ Sign In | Vijay Thapa
                 {% get_providers as socialaccount_providers %}
 
                 {% if socialaccount_providers %}
-                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-lg btn-danger btn-block">Log in with Google</a>
-                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-lg btn-dark btn-block">Log in with Github</a>
+                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-md btn-danger btn-block">Log in with Google</a>
+                    <a href="{% provider_login_url "github" process="login" %}" class="btn btn-md btn-dark btn-block">Log in with Github</a>
                 {% endif %}
 
                 <p class="mt-5 mb-3 text-muted text-center">or <a href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
