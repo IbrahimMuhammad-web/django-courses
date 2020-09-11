@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Course, Lecture
+from .models import Course, Lecture, Enroll
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required # for Access Control
+
 
 # Create your views here.
 
@@ -24,9 +26,17 @@ def course_detail(request, course_slug):
     try:
         course = Course.objects.get(course_slug=course_slug)
         lectures = Lecture.objects.filter(course=course.id)
+
+        # if request.user.is_authenticated():
+        #     enroll = Enroll.objects.filter(course=course, user=request.user)
+        # else:
+        #     enroll = None
+        
+
         context = {
             'course': course,
             'lectures': lectures,
+            # 'enroll': enroll,
         }
         return render(request, 'courses/course_detail.html', context)
 
@@ -67,6 +77,37 @@ def lecture_selected(request, course_slug, lecture_slug):
     except:
         messages.error(request, "Course Does not Exist.")
         return redirect(index)
+
+
+@login_required(login_url='account_login')
+def enroll(request, course_id):
+    user = request.user
+    course = Course.objects.get(id=course_id)
+
+    try:
+        Enroll.objects.create(user=user, course=course)
+        messages.success(request, "Successfully enrolled to the Course.")
+        return redirect(index)
+
+    except:
+        messages.error(request, "Couldn't Enroll to the course. Please try again later.")
+        return redirect(index)
+
+
+@login_required(login_url='account_login')
+def enrolled_courses(request):
+
+    try:
+        courses = Enroll.objects.filter(user=request.user)
+        context = {
+            'courses': courses,
+        }
+        return render(request, 'courses/enrolled_courses.html', context)
+
+    except:
+        messages.error(request, "Couldn't Enroll to the course. Please try again later.")
+        return redirect(index)
+    
 
         
 

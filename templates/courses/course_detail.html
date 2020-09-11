@@ -16,9 +16,11 @@
         {% endif %}
 
         <div class="mt-5">
-            <a href="#" class="btn btn-danger btn-lg mr-3">Enroll Now</a>
 
             <a href="{% url 'lecture' course.course_slug %}" class="btn btn-primary btn-lg">Go to the Course</a>
+           
+            <a href="{% url 'enroll' course.id %}" class="btn btn-danger btn-lg mr-3">Enroll Now</a>
+   
         </div>
 
         <p class="mt-5 lead">

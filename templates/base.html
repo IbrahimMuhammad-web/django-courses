@@ -98,9 +98,15 @@
                     My Courses
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Profile</a>
+
+                      {% if enrolled_courses %}
+                        {% for enrolled_course in enrolled_courses %}
+                          <a class="dropdown-item" href="#"><small>{{ enrolled_course.course.course_title }}</small></a>
+                        {% endfor %}
+                      {% endif %}
+
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">See All</a>
+                      <a class="dropdown-item" href="{% url 'enrolled-courses' %}">See All</a>
                     </div>
                 </li>
 
