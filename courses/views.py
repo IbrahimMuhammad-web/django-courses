@@ -27,16 +27,17 @@ def course_detail(request, course_slug):
         course = Course.objects.get(course_slug=course_slug)
         lectures = Lecture.objects.filter(course=course.id)
 
-        # if request.user.is_authenticated():
-        #     enroll = Enroll.objects.filter(course=course, user=request.user)
-        # else:
-        #     enroll = None
+        # Check
+        if request.user.is_authenticated:
+            enrolled = Enroll.objects.filter(course=course, user=request.user)
+        else:
+            enrolled = None
         
 
         context = {
             'course': course,
             'lectures': lectures,
-            # 'enroll': enroll,
+            'enrolled': enrolled,
         }
         return render(request, 'courses/course_detail.html', context)
 

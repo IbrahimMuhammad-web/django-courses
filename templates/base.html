@@ -101,7 +101,7 @@
 
                       {% if enrolled_courses %}
                         {% for enrolled_course in enrolled_courses %}
-                          <a class="dropdown-item" href="#"><small>{{ enrolled_course.course.course_title }}</small></a>
+                          <a class="dropdown-item" href="{% url 'lecture' enrolled_course.course.course_slug %}"><small>{{ enrolled_course.course.course_title }}</small></a>
                         {% endfor %}
                       {% endif %}
 

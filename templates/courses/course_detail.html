@@ -16,10 +16,12 @@
         {% endif %}
 
         <div class="mt-5">
-
+            
+            {% if enrolled %}
             <a href="{% url 'lecture' course.course_slug %}" class="btn btn-primary btn-lg">Go to the Course</a>
-           
+            {% else %}
             <a href="{% url 'enroll' course.id %}" class="btn btn-danger btn-lg mr-3">Enroll Now</a>
+            {% endif %}
    
         </div>
 
