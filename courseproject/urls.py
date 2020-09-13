@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('courses.urls')),
+    path('', include('core.urls')),
 ]
 # To Display Images while onlocal server
 if settings.DEBUG:

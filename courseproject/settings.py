@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'courses',
+    'core',
+    
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
