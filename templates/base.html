@@ -76,7 +76,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {% for topic in topics%}
-                  <a class="dropdown-item" href="#">{{ topic }}</a>
+                  <a class="dropdown-item" href="{% url 'topic-courses' topic.topic_slug %}">{{ topic }}</a>
                 {% endfor %}
                 {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
                 </div>

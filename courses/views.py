@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Course, Lecture, Enroll
+from .models import Topic, Course, Lecture, Enroll
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required # for Access Control
 
@@ -20,6 +20,16 @@ def courses(request):
         'courses': courses,
     }
     return render(request, 'courses/courses.html', context)
+
+
+def topic_courses(request, topic_slug):
+    topic = Topic.objects.get(topic_slug=topic_slug)
+    courses = Course.objects.filter(course_is_active='Yes', course_topic=topic)
+    context = {
+        'courses': courses,
+        'topic': topic,
+    }
+    return render(request, 'courses/topic_courses.html', context)
 
 
 def course_detail(request, course_slug):
