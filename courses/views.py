@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required # for Access Control
 
 
+
 # Create your views here.
 
 def index(request):
@@ -30,6 +31,19 @@ def topic_courses(request, topic_slug):
         'topic': topic,
     }
     return render(request, 'courses/topic_courses.html', context)
+
+
+def search_courses(request):
+    if request.method == "GET":
+        keyword = request.GET.get('q')
+        courses = Course.objects.filter(course_is_active='Yes')
+        searched_courses = courses.filter(course_title__icontains=keyword) | courses.filter(course_description__icontains=keyword)
+        
+        context = {
+            'courses': searched_courses,
+            'keyword': keyword,
+        }
+        return render(request, 'courses/search_courses.html', context)
 
 
 def course_detail(request, course_slug):

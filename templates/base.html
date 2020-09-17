@@ -85,8 +85,8 @@
                 <a class="nav-link" href="#">Donate</a>
             </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search-courses' %}">
+            <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
             {% comment %} <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> {% endcomment %}
             </form>
 
