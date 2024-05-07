@@ -58,7 +58,10 @@ class Course(models.Model):
     seo_course_title = models.CharField(max_length=60, blank=True, null=True, verbose_name="SEO Course Title (60 Characters Long)")
     seo_course_keywords = models.TextField(blank=True, null=True, verbose_name="SEO for Course Keywords, Separated by Commas")
     seo_course_description = models.TextField(blank=True, null=True, verbose_name="SEO Course Description (160 Characters Long)")
-
+    
+    class Meta:
+        ordering = ('-course_created_at', )
+        
     def __str__(self):
         return self.course_title
 
