@@ -75,14 +75,14 @@
                 Categories
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% for topic in topics%}
+                {% for topic in topics %}
                   <a class="dropdown-item" href="{% url 'topic-courses' topic.topic_slug %}">{{ topic }}</a>
                 {% endfor %}
                 {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Donate</a>
+                <a class="nav-link" href="https://buymeacoffee.com/vijaythapa">Donate</a>
             </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search-courses' %}">
