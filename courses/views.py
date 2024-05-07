@@ -70,34 +70,58 @@ def course_detail(request, course_slug):
         return redirect(index)
 
 
+@login_required(login_url='account_login')
 def lecture(request, course_slug):
     try:
         course = Course.objects.get(course_slug=course_slug)
         lectures = Lecture.objects.filter(course=course.id)
         first_lecture = Lecture.objects.filter(course=course.id)[:1]
+        #Check User Enrolled
+        enrolled = Enroll.objects.filter(course=course, user=request.user)
+
         context = {
             'course': course,
             'lectures': lectures,
             'first_lecture': first_lecture,
+            'enrolled': enrolled,
         }
-        return render(request, 'courses/lecture.html', context)
+        # return render(request, 'courses/lecture.html', context)
+        #Check User Enrolled
+        if enrolled:
+            return render(request, 'courses/lecture.html', context)
+        else:
+            #User Logged In but Not Enrolled
+            messages.error(request, "Enroll Now to access this course.")
+            return render(request, 'courses/course_detail.html', context)
 
     except:
         messages.error(request, "Course Does not Exist.")
         return redirect(index)
 
 
+@login_required(login_url='account_login')
 def lecture_selected(request, course_slug, lecture_slug):
     try:
         course = Course.objects.get(course_slug=course_slug)
         lectures = Lecture.objects.filter(course=course.id)
         lecture_selected = Lecture.objects.get(lecture_slug=lecture_slug)
+        #Check User Enrolled
+        enrolled = Enroll.objects.filter(course=course, user=request.user)
+
         context = {
             'course': course,
             'lectures': lectures,
             'lecture_selected': lecture_selected,
+            'enrolled': enrolled,
         }
-        return render(request, 'courses/lecture_selected.html', context)
+        # return render(request, 'courses/lecture_selected.html', context)
+        #Check User Enrolled
+        if enrolled:
+            return render(request, 'courses/lecture_selected.html', context)
+        else:
+            #User Logged In but Not Enrolled
+            messages.error(request, "Enroll Now to access this course.")
+            return render(request, 'courses/course_detail.html', context)
 
     except:
         messages.error(request, "Course Does not Exist.")
