@@ -4,7 +4,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'lecture' course.course_slug %}">
               <span data-feather="home"></span>
-              <strong>Course Content</strong> <span class="sr-only">(current)</span>
+              <strong>Course Content</strong> - <small>{{ course.course_title }}</small> <span class="sr-only">(current)</span>
             </a>
           </li>
 
