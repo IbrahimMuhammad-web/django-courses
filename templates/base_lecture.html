@@ -57,7 +57,14 @@
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Sign out</a>
+      {% comment %} <a class="nav-link" href="{% url 'account_logout' %}">Sign out</a> {% endcomment %}
+      <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <button type="submit" class="btn btn-outline-secondary">Log Out</button>
+      </form>
     </li>
   </ul>
 </nav>
