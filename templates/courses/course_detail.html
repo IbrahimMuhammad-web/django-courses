@@ -37,11 +37,38 @@
         <div class="list-group">
             {% if lectures %}
                 <h3 class="my-5">All Lectures</h3>
+
                 {% for lecture in lectures %}
-                    <a href="#" class="list-group-item list-group-item-action {% if lecture.lecture_previewable == "No" %}disabled{% endif %}">
+                    {% comment %} <a href="#" class="list-group-item list-group-item-action {% if lecture.lecture_previewable == "No" %}disabled{% endif %}">
                         {{ lecture.lecture_title }}  {% if lecture.lecture_previewable == "Yes" %}<small class="text-muted">[ Watch Preview ]</small>{% endif %}
-                    </a>
+                    </a> {% endcomment %}
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="list-group-item list-group-item-action {% if lecture.lecture_previewable == "No" %}disabled{% endif %}" data-bs-toggle="modal" data-bs-target="#Modal{{ lecture.id }}">
+                        {{ lecture.lecture_title }}  {% if lecture.lecture_previewable == "Yes" %}<small class="text-muted">[ Watch Preview ]</small>{% endif %}
+                    </button>
+
+                      {% if lecture.lecture_video and lecture.lecture_previewable == "Yes" %}
+                      <!-- Modal -->
+                      <div class="modal fade" id="Modal{{lecture.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <p class="modal-title fs-5 text-center" id="exampleModalLabel"><strong>Preview:</strong> {{ lecture.lecture_title }}</p>
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"> x </button>
+                            </div>
+                            <div class="modal-body">
+                              <iframe width="100%" height="350" src="https://www.youtube.com/embed/{{ lecture.lecture_video }}" title="{{ lecture.lecture_title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endif %}
                 {% endfor %}
+
             {% endif %}
         </div>
 
