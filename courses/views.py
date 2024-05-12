@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required # for Access Control
 # Create your views here.
 
 def index(request):
-    courses = Course.objects.filter(course_is_active='Yes')
+    courses = Course.objects.filter(course_is_active='Yes', course_is_featured="Yes")
     context = {
         'courses': courses,
     }
