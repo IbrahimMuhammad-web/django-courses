@@ -5,6 +5,11 @@
 {{ course.course_title }} | Vijay Thapa
 {% endblock title %}
 
+{% block meta %}
+    <meta name="description" content="{{ course.seo_course_description }}">
+    <meta name="keywords" content="{{ course.seo_course_keywords }}">
+{% endblock meta %}
+
 {% block content %}
     <div class="row">
     
