@@ -1,5 +1,7 @@
 {% extends "account/base.html" %}
 
+{% load static %}
+
 {% load i18n %}
 {% load account socialaccount %}
 
@@ -30,8 +32,13 @@ Sign In | Vijay Thapa
                 {% get_providers as socialaccount_providers %}
 
                 {% if socialaccount_providers %}
-                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-md btn-danger btn-block">Log in with Google</a>
-                    <a href="{% provider_login_url "github" process="login" %}" class="btn btn-md btn-dark btn-block">Log in with Github</a>
+                    <br>
+                    <a href="{% provider_login_url "google" process="login" %}" class="btn btn-md btn-outline-dark btn-block">
+                        <img src="{% static 'images/google.png' %}" alt="Google Logo" width="30" /> Log in with Google
+                    </a>
+                    <a href="{% provider_login_url "github" process="login" %}" class="btn btn-md btn-dark btn-block">
+                        <img src="{% static 'images/github.png' %}" alt="Github Logo White" width="30" /> Log in with Github
+                    </a>
                 {% endif %}
 
                 <p class="mt-5 mb-3 text-muted text-center">or <a href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
