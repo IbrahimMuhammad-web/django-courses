@@ -78,9 +78,9 @@ For Mac
 $  source venv/bin/activate
 ```
 
-**3. Clone This Project**
+**3. Clone This Project (Using SSH)**
 ```
-$  git clone https://github.com/vijaythapa333/django-courses.git
+$  git clone git@github.com:vijaythapa333/django-courses.git
 ```
 Then Enter The Project
 
