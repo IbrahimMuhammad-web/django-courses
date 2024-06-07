@@ -11,7 +11,7 @@ def head_menu(request):
 
 def my_courses(request):
     if request.user.is_authenticated:
-        enrolled_courses = Enroll.objects.filter(user=request.user)[:5]
+        enrolled_courses = Enroll.objects.filter(user=request.user).order_by('-enrolled_date')[:5]
     else:
         enrolled_courses = None 
     context = {
