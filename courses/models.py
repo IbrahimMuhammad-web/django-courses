@@ -37,8 +37,15 @@ class Course(models.Model):
     course_title = models.CharField(max_length=200, verbose_name="Course Title")
     course_slug = models.SlugField(verbose_name="Course Slug")
     course_description = models.TextField(blank=True, null=True, verbose_name="Course Description")
-    course_topic = models.ManyToManyField(Topic, verbose_name="Course Topic")
+    course_topic = models.ManyToManyField(Topic, verbose_name="Course Topic", null=True)
     course_image = models.ImageField(upload_to="courses/", blank=True, null=True)
+    lecturer = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='courses_taught',
+        verbose_name='Lecturer',
+        null=True,
+    )
     course_is_active = models.CharField(
         choices = IS_ACTIVE,
         default = 'Yes',

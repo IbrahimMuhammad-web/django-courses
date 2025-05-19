@@ -4,6 +4,14 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="home"),
+    
+    # Authentication URLs
+    path('login/', views.user_login, name='account_login'),
+    path('logout/', views.user_logout, name='logout'),
+    path('signup/student/', views.student_signup, name='student-signup'),
+    path('signup/lecturer/', views.lecturer_signup, name='lecturer-signup'),
+    
+    
     path('courses/', views.courses, name="courses"),
     path('courses/search/', views.search_courses, name="search-courses"),
     path('courses/enrolled-courses/', views.enrolled_courses, name="enrolled-courses"),
@@ -15,4 +23,12 @@ urlpatterns = [
 
     path('course/enroll/<int:course_id>/', views.enroll, name="enroll"),
     
+    
+    # Lecturer URLs
+    path('lecturer/dashboard/',  views.lecturer_dashboard, name='lecturer-dashboard'),
+    path('lecturer/course/add/', views.add_course,         name='add-course'),
+    path('lecturer/course/<int:course_id>/edit/', views.edit_course, name='edit-course'),
+    path('lecturer/course/<int:course_id>/add-lecture/', views.add_lecture, name='add-lecture'),
+    path('lecturer/lecture/<int:lecture_id>/edit/', views.edit_lecture, name='edit-lecture'),
+
 ]

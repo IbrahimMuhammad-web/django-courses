@@ -23,7 +23,7 @@ SECRET_KEY = '=$!k4_-j55pd3i5ku^0$%h%wp^q)6^#xva$gvf(4*ce)i*99mv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,11 +40,6 @@ INSTALLED_APPS = [
     'courses',
     'core',
     
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    # 'allauth.account.middleware.AccountMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -79,11 +75,8 @@ TEMPLATES = [
 
 # For Django All Auth
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
+    # Needed to login by username in Django admin
     'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'courseproject.wsgi.application'
@@ -94,8 +87,12 @@ WSGI_APPLICATION = 'courseproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sammy_db',
+        'USER': 'postgres',
+        'PASSWORD': 'Hamma6842',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -151,44 +148,16 @@ MESSAGE_TAGS = {
 
 # Using .env
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
-EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = os.getenv('EMAIL_HOST')
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+# EMAIL_PORT = 587
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
 
-# For Django All Auth
-SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_REQUIRED=True
-ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
-ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
-# Turn Off Verification Email
-ACCOUNT_EMAIL_VERIFICATION = None
 
-# Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    },
-    'github': {
-        'SCOPE': [
-            'user',
-            'repo',
-            'read:org',
-        ],
-    }
-}
